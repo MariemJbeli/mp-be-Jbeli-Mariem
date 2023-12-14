@@ -7,10 +7,16 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
+
+import soa.entities.Categorie;
 import soa.entities.Produit;
 
 
 public interface ProduitRepository extends JpaRepository<Produit, Long> {
+	
+	void deleteById(Long id);
+	 
+	  
 	@Query("select p from Produit p where p.designation like %:x% ")
 	public List<Produit> findByDesignation(@Param("x") String mc);
 
@@ -21,6 +27,21 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
 	@Modifying
 	@Transactional
 	public int mettreAJourDesignation(@Param("designation") String designation, @Param("id") Long idProduit);
+	@Query("update Produit p set p.code =:code where p.id = :id")
+	@Modifying
+	@Transactional
+	public int mettreAJourCode(@Param("code") String code, @Param("id") Long idProduit);
+	@Query("update Produit p set p.prix =:prix where p.id = :id")
+	@Modifying
+	@Transactional
+	public int mettreAJourPrix(@Param("prix") String code, @Param("id") Long idProduit);
+	
+	@Query("update Produit p set p.categorie = :categorie where p.id = :id")
+	@Modifying
+	@Transactional
+	public int mettreAJourCategorie(@Param("categorie") Categorie categorie, @Param("id") Long idProduit);
+
+	
 	List<Produit> findByPrixGreaterThan(double prixMin);
 	   // Retourner la liste des Produits par recherche par designation et dont le prix est supérieur à un prix minimal
     List<Produit> findByDesignationLikeAndPrixGreaterThan(String mc, double prixMin);
@@ -35,4 +56,7 @@ public interface ProduitRepository extends JpaRepository<Produit, Long> {
     List <Produit> findAllByDateAchatAfter(java.util.Date dateX);
 	//Retourner la liste des produits dont la date d’achat est inférieure à une date donnée
 	List <Produit> findAllByDateAchatBefore(java.util.Date dateX);
+	
+	 
 }
+

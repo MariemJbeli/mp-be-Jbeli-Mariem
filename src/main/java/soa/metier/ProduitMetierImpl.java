@@ -62,6 +62,16 @@ public class ProduitMetierImpl    implements ProduitMetierInterface{
     public List<Produit> listeProduits() {
         return produitRepository.findAll();
     }
+    
+    @Override
+    public List<Categorie> listeCategorie() {
+        return categorieRepository.findAll();
+    }
+    
+    public void     ajouterCategorie(Categorie c)
+    {
+    	categorieRepository.save(c);
+    }
 
     @Override
     public void rendreProduitsEnPromotionAvant(Date date)

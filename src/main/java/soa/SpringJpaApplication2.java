@@ -6,6 +6,7 @@ import org.springframework.context.ApplicationContext;
 import soa.entities.Categorie;
 import soa.entities.Produit;
 import soa.entities.Stock;
+import soa.metier.CategorieMetierInterface;
 import soa.metier.ProduitMetierInterface;
 
 import java.text.ParseException;
@@ -17,15 +18,21 @@ public class SpringJpaApplication2 {
     //déclaration des objets de type Repository
     //Déclaration d'un objet métier pour gérer les produits
     static ProduitMetierInterface produitMetier;
-
+    static CategorieMetierInterface categorieMetier;
     public static void main(String[] args) {
+
+
         System.out.println("---------Injection de dépendances----------");
         //Commencer par réaliser les injections de dépendances pour les objets de type Repository
         // référencer le contexte
         ApplicationContext contexte = SpringApplication.run(SpringJpaApplication2.class, args);
         // Récupérer une implémentation de l'interface "ProduitRepository" par injection de dépendance
         produitMetier = contexte.getBean(ProduitMetierInterface.class);
+        categorieMetier = contexte	.getBean(CategorieMetierInterface.class);
+        
+        System.out.println("---------Injection de dépendances----------");
 
+       
 
         //objet pour formater les dates selon le pattern "yyyy-MM-dd"
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -95,6 +102,7 @@ public class SpringJpaApplication2 {
         //Calculer le coût de vente de tous les produits en stock en appliquant la remise sur les produits en promotion
         System.out.println("-7-Calculer le coût de vente de tous les produits en stock en appliquant la remise sur les produits en promotion");
         System.out.println("Cout de vente du stock:"+produitMetier.calculerCoutVenteStock(50));
+        System.out.println(produitMetier.listeCategorie());
 
     }
 
@@ -112,4 +120,20 @@ public class SpringJpaApplication2 {
         }
         System.out.println("********************Fin************************");
     }
-}
+    static void afficherTousLesCategories()
+    {
+        System.out.println("********************Début**********************");
+        System.out.println("Afficher tous les categories...");
+        System.out.println("***********************************************");
+
+        List<Categorie> lp = produitMetier.listeCategorie();
+        for (Categorie p : lp)
+        {
+            System.out.println(p);
+        }
+        System.out.println("********************Fin************************");
+    }}
+    
+    
+
+    

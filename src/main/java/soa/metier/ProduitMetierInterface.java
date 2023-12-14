@@ -14,6 +14,7 @@ public interface ProduitMetierInterface {
    void ajouterProduit(Produit p, Categorie c);
    void ajouterProduit(Produit p, Categorie c, Stock s);
    List<Produit> listeProduits();
+   List<Categorie> listeCategorie();
    void rendreProduitsEnPromotionAvant(Date date);
    double calculerCoutVenteStock(double coefficientRemise);
 }

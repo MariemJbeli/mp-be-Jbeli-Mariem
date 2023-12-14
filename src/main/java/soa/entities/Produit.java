@@ -16,6 +16,7 @@ import jakarta.persistence.TemporalType;
 
 @Entity
 public class Produit {
+	
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -136,6 +137,8 @@ public class Produit {
 	public void setQuantite(int quantite) {
 		this.quantite = quantite;
 	}
+	
+	
 
 	public Produit() {
 		super();
@@ -163,4 +166,7 @@ public class Produit {
 		this.prix = prix;
 		this.quantite = quantite;
 	}
+	 
+
+	
 }

@@ -2,6 +2,7 @@ package soa.entities;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
@@ -44,6 +45,12 @@ public class Categorie
 		this.code = code;
 		this.libelle = libelle;
 	}
+	
+	
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, code, libelle);
+    }
 
 	@Override
 	public String toString() {
